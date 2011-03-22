@@ -28,8 +28,8 @@ public class Help extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem homeItem = menu.add(0, 0, 0, "Home");
-		MenuItem aboutItem = menu.add(0, 1, 0, "About");
+		MenuItem homeItem = menu.add(0, 0, 0, "Hjem");
+		MenuItem aboutItem = menu.add(0, 1, 0, "Om");
 		homeItem.setIcon(android.R.drawable.ic_menu_edit);
 		aboutItem.setIcon(android.R.drawable.ic_menu_info_details);
 

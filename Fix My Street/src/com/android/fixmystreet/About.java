@@ -31,7 +31,7 @@ public class About extends Activity {
 		// add links
 		TextView noteView = (TextView) findViewById(R.id.faq);
 		TextView noteView2 = (TextView) findViewById(R.id.faq2);
-		noteView2.setText("This application is version " + versionName + " of Fix My Street for Android, written by Anna Powell-Smith. Thanks to Paul for testing.");
+		noteView2.setText("Dette er versjon " + versionName + " av FiksGataMi for Android, skrevet av Anna Powell-Smith, oversatt til Norsk av Ørjan Hoyd Vøllestad. Takk til Paul for testing.");
 		Linkify.addLinks(noteView, Linkify.ALL);
 	}
 
@@ -43,8 +43,8 @@ public class About extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem homeItem = menu.add(0, 0, 0, "Home");
-		MenuItem aboutItem = menu.add(0, 1, 0, "Help");
+		MenuItem homeItem = menu.add(0, 0, 0, "Hjem");
+		MenuItem aboutItem = menu.add(0, 1, 0, "Hjelp");
 		aboutItem.setIcon(android.R.drawable.ic_menu_info_details);
 		homeItem.setIcon(android.R.drawable.ic_menu_edit);
 		return true;

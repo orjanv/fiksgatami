@@ -30,7 +30,7 @@ public class Success extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem helpItem = menu.add(0, 0, 0, "Home");
+		MenuItem helpItem = menu.add(0, 0, 0, "Hjem");
 		helpItem.setIcon(android.R.drawable.ic_menu_edit);
 		return true;
 	}

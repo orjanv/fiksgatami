@@ -24,7 +24,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -32,18 +34,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.TextView;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class Home extends Activity {
 	// ****************************************************
@@ -154,7 +153,7 @@ public class Home extends Activity {
 		.getSystemService(Context.TELEPHONY_SERVICE);
 		String country = mTelephonyMgr.getNetworkCountryIso();
 		//Log.d(LOG_TAG, "country = " + country);
-		if (!(country.matches("gb"))) {
+		if (!(country.matches("no"))) {
 			showDialog(COUNTRY_ERROR);
 		}
 	}
@@ -208,7 +207,7 @@ public class Home extends Activity {
 				// envelope.setBounds(0, 0, envelope.getIntrinsicWidth(),
 				// envelope
 				// .getIntrinsicHeight());
-				btnDetails.setText("Details added: '" + subject + "'");
+				btnDetails.setText("Detaljer lagt til: '" + subject + "'");
 				btnDetails.setCompoundDrawables(null, null, checked, null);
 			} else {
 				// Log.d(LOG_TAG, "Don't have details");
@@ -227,7 +226,7 @@ public class Home extends Activity {
 			// camera.setBounds(0, 0, camera.getIntrinsicWidth(), camera
 			// .getIntrinsicHeight());
 			btnPicture.setCompoundDrawables(null, null, checked, null);
-			btnPicture.setText("Photo taken");
+			btnPicture.setText("Bilde tatt");
 		}
 		if (havePicture && haveDetails) {
 			textProgress.setVisibility(View.VISIBLE);
@@ -288,7 +287,7 @@ public class Home extends Activity {
 			checked.setBounds(0, 0, checked.getIntrinsicWidth(), checked
 					.getIntrinsicHeight());
 			btnPicture.setCompoundDrawables(null, null, checked, null);
-			btnPicture.setText("Photo taken");
+			btnPicture.setText("Bilde tatt");
 		}
 		Log.d(LOG_TAG, "havePicture = " + havePicture.toString());
 	}
@@ -322,8 +321,8 @@ public class Home extends Activity {
 		pd = ProgressDialog
 		.show(
 				this,
-				"Uploading, please wait...",
-				"Uploading. This can take up to a minute, depending on your connection speed. Please be patient!",
+				"Laster opp, vennligst vent...",
+				"Laster opp. Dette kan ta opptil ett minutt, avhengig av tilkobling din. Vær tålmodig!",
 				true, false);
 		Thread t = new Thread() {
 			public void run() {
@@ -360,7 +359,7 @@ public class Home extends Activity {
 		switch (id) {
 		case COUNTRY_ERROR:
 			return new AlertDialog.Builder(Home.this)
-			.setTitle("Country or network error")
+			.setTitle("Sted eller nettverksfeil")
 			.setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,
@@ -368,11 +367,11 @@ public class Home extends Activity {
 				}
 			})
 			.setMessage(
-			"Sorry, FixMyStreet currently only works in Britain. You won't be able to submit reports from your current location. (You may also see this error if you aren't connected to the network.)")
+			"Beklager, FiksGataMi fungerer bare i Norge. Du kan ikke rapportere fra der du befinner deg. (Du kan også se denne feilmeldingen om du ikke er tilkoblet internett)")
 			.create();
 		case UPLOAD_ERROR:
 			return new AlertDialog.Builder(Home.this)
-			.setTitle("Upload error")
+			.setTitle("Feil ved opplasting")
 			.setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,
@@ -380,11 +379,11 @@ public class Home extends Activity {
 				}
 			})
 			.setMessage(
-					"Sorry, there was an error uploading - maybe the network connection is down? Please try again later. Exception: " + exception_string + " " + serverResponse)
+					"Beklager, det skjedde en feil under opplasting - kanskje du er uten nettverkstilgang? Vennligst prøv igjen senere. Exception: " + exception_string + " " + serverResponse)
 					.create();
 		case UPLOAD_ERROR_SERVER:
 			return new AlertDialog.Builder(Home.this)
-			.setTitle("Upload error")
+			.setTitle("Feil ved opplasting")
 			.setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,
@@ -392,11 +391,11 @@ public class Home extends Activity {
 				}
 			})
 			.setMessage(
-					"Sorry, there was an error uploading. Please try again later. The server response was: "
+					"Beklager, det skjedde en feil under opplasting. Vennligst prøv igjen senere. Melding fra server: "
 					+ serverResponse).create();
 		case LOCATION_NOT_FOUND:
 			return new AlertDialog.Builder(Home.this)
-			.setTitle("Location problem")
+			.setTitle("Feil med sted")
 			.setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,
@@ -404,29 +403,29 @@ public class Home extends Activity {
 				}
 			})
 			.setMessage(
-			"Could not get location! Can you see the sky? Please try again later.")
+			"Kunne ikke lokalisere sted! Kan du se himmelen? Vennligst prøv igjen senere.")
 			.create();
 		case PHOTO_NOT_FOUND:
-			return new AlertDialog.Builder(Home.this).setTitle("No photo")
+			return new AlertDialog.Builder(Home.this).setTitle("Ingen bilde")
 			.setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,
 						int whichButton) {
 				}
-			}).setMessage("Photo not found!").create();
+			}).setMessage("Bilde ikke funnet!").create();
 		case UPON_UPDATE:
 			if (versionName == null) {
 				versionName = "";
 			}
-			return new AlertDialog.Builder(Home.this).setTitle("What's new?")
+			return new AlertDialog.Builder(Home.this).setTitle("Hva er nytt?")
 			.setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,
 						int whichButton) {
 				}
 			}).setMessage(
-					"New features in version" + versionName
-					+ ": better GPS fix.").create();
+					"Nytt i versjon" + versionName
+					+ ": bedre GPS posisjonering.").create();
 		}
 		return null;
 	}
@@ -440,7 +439,7 @@ public class Home extends Activity {
 		String responseString = null;
 		PostMethod method;
 
-		method = new PostMethod("http://www.fixmystreet.com/import");
+		method = new PostMethod("http://fiksgatami-dev.nuug.no/import");
 
 		try {
 
@@ -535,17 +534,17 @@ public class Home extends Activity {
 				// nor do we want to report if the GPS time hasn't changed at
 				// all - it is probably out of date
 				textProgress
-				.setText("Waiting for a GPS fix: phone says last fix is out of date. Please make sure you can see the sky.");
+				.setText("Venter på GPS: telefonen sier siste tilkobling er for gammel. Pass på at du kan se himmelen.");
 			} else {
 				textProgress
-				.setText("Waiting for a GPS fix: phone says last fix had accuracy of "
+				.setText("Venter på GPS: telefonen sier at siste målte nøyaktighet var "
 						+ locAccuracy
-						+ "m. (We need accuracy of 24m.) Please make sure you can see the sky.");
+						+ "m. (Vi trenger en nøyaktighet på 24m.) Pass på at du kan se himmelen.");
 			}
-		} else if (locAccuracy == 0) {
-			// or if no accuracy data is available
-			textProgress
-			.setText("Waiting for a GPS fix... Please make sure you can see the sky.");
+//		} else if (locAccuracy == 0) {
+//			// or if no accuracy data is available
+//			textProgress
+//			.setText("Venter på GPS... Pass på at du kan se himmelen.");
 		} else {
 			// but if all the requirements have been met, proceed
 			latitude = location.getLatitude();
@@ -554,10 +553,10 @@ public class Home extends Activity {
 			longString = longitude.toString();
 			if (haveDetails && havePicture) {
 				btnReport.setVisibility(View.VISIBLE);
-				btnReport.setText("GPS found! Report to Fix My Street");
+				btnReport.setText("GPS signal funnet! Rapporter til FiksGataMi");
 				textProgress.setVisibility(View.GONE);
 			} else {
-				textProgress.setText("GPS found!");
+				textProgress.setText("GPS signal funnet!");
 			}
 			previousGPSFixTime = latestGPSFixTime;
 			return true;
@@ -613,8 +612,8 @@ public class Home extends Activity {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder
 		.setMessage(
-				"Your GPS seems to be disabled. Do you want to turn it on now?")
-				.setCancelable(false).setPositiveButton("Yes",
+				"GPS er avslått. Vil du slå den på nå?")
+				.setCancelable(false).setPositiveButton("Ja",
 						new DialogInterface.OnClickListener() {
 					public void onClick(
 							@SuppressWarnings("unused") final DialogInterface dialog,
@@ -624,7 +623,7 @@ public class Home extends Activity {
 						.setAction("android.settings.LOCATION_SOURCE_SETTINGS");
 						startActivity(j);
 					}
-				}).setNegativeButton("No",
+				}).setNegativeButton("Nei",
 						new DialogInterface.OnClickListener() {
 					public void onClick(final DialogInterface dialog,
 							@SuppressWarnings("unused") final int id) {
@@ -652,8 +651,8 @@ public class Home extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem helpItem = menu.add(0, 0, 0, "Help");
-		MenuItem aboutItem = menu.add(0, 1, 0, "About");
+		MenuItem helpItem = menu.add(0, 0, 0, "Hjelp");
+		MenuItem aboutItem = menu.add(0, 1, 0, "Om");
 		aboutItem.setIcon(android.R.drawable.ic_menu_info_details);
 		helpItem.setIcon(android.R.drawable.ic_menu_help);
 		return true;

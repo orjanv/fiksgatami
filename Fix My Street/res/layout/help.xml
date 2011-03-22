@@ -10,7 +10,7 @@
 		android:scrollbars="vertical">
 
 		<TextView android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:text="What do I do?"
+			android:layout_height="wrap_content" android:text="Hva gjør jeg?"
 			android:paddingBottom="5dip" android:paddingTop="5dip"
 			android:paddingLeft="5dip" android:paddingRight="5dip"
 			android:textStyle="bold" />
@@ -22,7 +22,7 @@
 
 		<TextView android:id="@+id/faq" android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:text="For any other questions, see http://www.fixmystreet.com/faq, or email anna@mysociety.org."
+			android:text="For andre spørsmål, se http://www.fiksgatami.no/faq, eller send en e-post til orjanv@droidnytt.no."
 			android:paddingBottom="5dip" android:paddingTop="5dip"
 			android:paddingLeft="5dip" android:paddingRight="5dip"
 			android:textStyle="bold" android:linksClickable="true" />

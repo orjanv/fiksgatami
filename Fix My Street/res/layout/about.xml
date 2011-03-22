@@ -9,20 +9,20 @@
 		android:layout_height="wrap_content" android:padding="0dip">
 
 		<TextView android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:text="What is Fix My Street?"
+			android:layout_height="wrap_content" android:text="Hva er FiksGataMi?"
 			android:paddingBottom="5dip" android:paddingTop="5dip"
 			android:paddingLeft="5dip" android:paddingRight="5dip"
 			android:textStyle="bold" />
 
 		<TextView android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:text="Fix My Street helps you report problems in your local area - like potholes or broken streetlights - to your council."
+			android:text="FiksGataMi hjelper deg å rapportere problemer i ditt nærområde - som hull i veien eller ødelagte gatelykter til kommunale instanser."
 			android:paddingBottom="5dip" android:paddingLeft="5dip"
 			android:paddingRight="5dip" />
 
 		<TextView android:id="@+id/faq" android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:text="Fix My Street is mainly a website, run by mySociety, a project of a registered charity. For more information, see http://www.fixmystreet.com/faq."
+			android:text="FiksGataMi er i hovedsak et nettsted, som drives av Foreningen Norsk Unix User Group (NUUG). For mer informasjon, gå til http://www.fiksgatami.no/faq."
 			android:paddingBottom="5dip" android:paddingLeft="5dip"
 			android:paddingRight="5dip" android:linksClickable="true" />
 

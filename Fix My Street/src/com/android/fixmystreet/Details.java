@@ -136,16 +136,16 @@ public class Details extends Activity {
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case SUBJECT_WARNING:
-			return new AlertDialog.Builder(Details.this).setTitle("Subject")
+			return new AlertDialog.Builder(Details.this).setTitle("Emne")
 					.setPositiveButton("OK",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int whichButton) {
 								}
-							}).setMessage("Please enter a subject!").create();
+							}).setMessage("Skriv hva det handler om!").create();
 		case NAME_WARNING:
 			return new AlertDialog.Builder(Details.this)
-					.setTitle("Name")
+					.setTitle("Navn")
 					.setPositiveButton("OK",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
@@ -153,12 +153,12 @@ public class Details extends Activity {
 								}
 							})
 					.setMessage(
-							"Please enter your name. We'll remember it for next time.")
+							"Skriv inn navnet ditt. Det blir husket til neste gang.")
 					.create();
 
 		case EMAIL_WARNING:
 			return new AlertDialog.Builder(Details.this)
-					.setTitle("Email")
+					.setTitle("E-post")
 					.setPositiveButton("OK",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
@@ -166,7 +166,7 @@ public class Details extends Activity {
 								}
 							})
 					.setMessage(
-							"Please enter a valid email address. We'll remember it for next time.")
+							"Skriv inn en gyldig e-postadresse. Den blir husket til neste gang.")
 					.create();
 
 		}
