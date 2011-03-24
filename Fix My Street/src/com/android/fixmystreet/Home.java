@@ -148,6 +148,7 @@ public class Home extends Activity {
 			editor.commit();
 		}
 
+		// TODO: Telephonymanager will probably not work on i.e tablets w/o gsm, check this
 		// Check country: show warning if not in Great Britain
 		TelephonyManager mTelephonyMgr = (TelephonyManager) this
 		.getSystemService(Context.TELEPHONY_SERVICE);
@@ -322,7 +323,7 @@ public class Home extends Activity {
 		.show(
 				this,
 				"Laster opp, vennligst vent...",
-				"Laster opp. Dette kan ta opptil ett minutt, avhengig av tilkobling din. Vær tålmodig!",
+				"Laster opp. Dette kan ta opptil ett minutt, avhengig av tilkobling din. Vï¿½r tï¿½lmodig!",
 				true, false);
 		Thread t = new Thread() {
 			public void run() {
@@ -367,7 +368,7 @@ public class Home extends Activity {
 				}
 			})
 			.setMessage(
-			"Beklager, FiksGataMi fungerer bare i Norge. Du kan ikke rapportere fra der du befinner deg. (Du kan også se denne feilmeldingen om du ikke er tilkoblet internett)")
+			"Beklager, FiksGataMi fungerer bare i Norge. Du kan ikke rapportere fra der du befinner deg. (Du kan ogsï¿½ se denne feilmeldingen om du ikke er tilkoblet internett)")
 			.create();
 		case UPLOAD_ERROR:
 			return new AlertDialog.Builder(Home.this)
@@ -379,7 +380,7 @@ public class Home extends Activity {
 				}
 			})
 			.setMessage(
-					"Beklager, det skjedde en feil under opplasting - kanskje du er uten nettverkstilgang? Vennligst prøv igjen senere. Exception: " + exception_string + " " + serverResponse)
+					"Beklager, det skjedde en feil under opplasting - kanskje du er uten nettverkstilgang? Vennligst prï¿½v igjen senere. Exception: " + exception_string + " " + serverResponse)
 					.create();
 		case UPLOAD_ERROR_SERVER:
 			return new AlertDialog.Builder(Home.this)
@@ -391,7 +392,7 @@ public class Home extends Activity {
 				}
 			})
 			.setMessage(
-					"Beklager, det skjedde en feil under opplasting. Vennligst prøv igjen senere. Melding fra server: "
+					"Beklager, det skjedde en feil under opplasting. Vennligst prï¿½v igjen senere. Melding fra server: "
 					+ serverResponse).create();
 		case LOCATION_NOT_FOUND:
 			return new AlertDialog.Builder(Home.this)
@@ -403,7 +404,7 @@ public class Home extends Activity {
 				}
 			})
 			.setMessage(
-			"Kunne ikke lokalisere sted! Kan du se himmelen? Vennligst prøv igjen senere.")
+			"Kunne ikke lokalisere sted! Kan du se himmelen? Vennligst prï¿½v igjen senere.")
 			.create();
 		case PHOTO_NOT_FOUND:
 			return new AlertDialog.Builder(Home.this).setTitle("Ingen bilde")
@@ -534,17 +535,17 @@ public class Home extends Activity {
 				// nor do we want to report if the GPS time hasn't changed at
 				// all - it is probably out of date
 				textProgress
-				.setText("Venter på GPS: telefonen sier siste tilkobling er for gammel. Pass på at du kan se himmelen.");
+				.setText("Venter pï¿½ GPS: telefonen sier siste tilkobling er for gammel. Pass pï¿½ at du kan se himmelen.");
 			} else {
 				textProgress
-				.setText("Venter på GPS: telefonen sier at siste målte nøyaktighet var "
+				.setText("Venter pï¿½ GPS: telefonen sier at siste mï¿½lte nï¿½yaktighet var "
 						+ locAccuracy
-						+ "m. (Vi trenger en nøyaktighet på 24m.) Pass på at du kan se himmelen.");
+						+ "m. (Vi trenger en nï¿½yaktighet pï¿½ 24m.) Pass pï¿½ at du kan se himmelen.");
 			}
 //		} else if (locAccuracy == 0) {
 //			// or if no accuracy data is available
 //			textProgress
-//			.setText("Venter på GPS... Pass på at du kan se himmelen.");
+//			.setText("Venter pï¿½ GPS... Pass pï¿½ at du kan se himmelen.");
 		} else {
 			// but if all the requirements have been met, proceed
 			latitude = location.getLatitude();
@@ -612,7 +613,7 @@ public class Home extends Activity {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder
 		.setMessage(
-				"GPS er avslått. Vil du slå den på nå?")
+				"GPS er avslï¿½tt. Vil du slï¿½ den pï¿½ nï¿½?")
 				.setCancelable(false).setPositiveButton("Ja",
 						new DialogInterface.OnClickListener() {
 					public void onClick(
