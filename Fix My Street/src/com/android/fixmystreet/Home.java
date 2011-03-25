@@ -323,7 +323,7 @@ public class Home extends Activity {
 		.show(
 				this,
 				"Laster opp, vennligst vent...",
-				"Laster opp. Dette kan ta opptil ett minutt, avhengig av tilkobling din. V�r t�lmodig!",
+				"Laster opp. Dette kan ta opptil ett minutt, avhengig av tilkobling din. Vær tålmodig!",
 				true, false);
 		Thread t = new Thread() {
 			public void run() {
@@ -368,7 +368,7 @@ public class Home extends Activity {
 				}
 			})
 			.setMessage(
-			"Beklager, FiksGataMi fungerer bare i Norge. Du kan ikke rapportere fra der du befinner deg. (Du kan ogs� se denne feilmeldingen om du ikke er tilkoblet internett)")
+			"Beklager, FiksGataMi fungerer bare i Norge. Du kan ikke rapportere fra der du befinner deg. (Du kan også se denne feilmeldingen om du ikke er tilkoblet internett)")
 			.create();
 		case UPLOAD_ERROR:
 			return new AlertDialog.Builder(Home.this)
@@ -380,7 +380,7 @@ public class Home extends Activity {
 				}
 			})
 			.setMessage(
-					"Beklager, det skjedde en feil under opplasting - kanskje du er uten nettverkstilgang? Vennligst pr�v igjen senere. Exception: " + exception_string + " " + serverResponse)
+					"Beklager, det skjedde en feil under opplasting - kanskje du er uten nettverkstilgang? Vennligst prøv igjen senere. Exception: " + exception_string + " " + serverResponse)
 					.create();
 		case UPLOAD_ERROR_SERVER:
 			return new AlertDialog.Builder(Home.this)
@@ -392,7 +392,7 @@ public class Home extends Activity {
 				}
 			})
 			.setMessage(
-					"Beklager, det skjedde en feil under opplasting. Vennligst pr�v igjen senere. Melding fra server: "
+					"Beklager, det skjedde en feil under opplasting. Vennligst prøv igjen senere. Melding fra server: "
 					+ serverResponse).create();
 		case LOCATION_NOT_FOUND:
 			return new AlertDialog.Builder(Home.this)
@@ -404,7 +404,7 @@ public class Home extends Activity {
 				}
 			})
 			.setMessage(
-			"Kunne ikke lokalisere sted! Kan du se himmelen? Vennligst pr�v igjen senere.")
+			"Kunne ikke lokalisere sted! Kan du se himmelen? Vennligst prøv igjen senere.")
 			.create();
 		case PHOTO_NOT_FOUND:
 			return new AlertDialog.Builder(Home.this).setTitle("Ingen bilde")
@@ -468,11 +468,11 @@ public class Home extends Activity {
 			photo.setCharSet(null);
 
 			Part[] parts = { new StringPart("service", "Android phone"),
-					new StringPart("subject", subject),
+					new StringPart("subject", subject),            
 					new StringPart("name", name),
-					new StringPart("email", email),
-					new StringPart("lat", latString),
-					new StringPart("lon", longString), photo };
+					new StringPart("email", email),                
+					new StringPart("lat", latString),              
+					new StringPart("lon", longString), photo };    
 
 			// Log.d(LOG_TAG, "sending off with lat " + latString + " and lon "
 			// + longString);
@@ -535,17 +535,17 @@ public class Home extends Activity {
 				// nor do we want to report if the GPS time hasn't changed at
 				// all - it is probably out of date
 				textProgress
-				.setText("Venter p� GPS: telefonen sier siste tilkobling er for gammel. Pass p� at du kan se himmelen.");
+				.setText("Venter på GPS: telefonen sier siste tilkobling er for gammel. Pass på at du kan se himmelen.");
 			} else {
 				textProgress
-				.setText("Venter p� GPS: telefonen sier at siste m�lte n�yaktighet var "
+				.setText("Venter på GPS: telefonen sier at siste målte nøyaktighet var "
 						+ locAccuracy
-						+ "m. (Vi trenger en n�yaktighet p� 24m.) Pass p� at du kan se himmelen.");
+						+ "m. (Vi trenger en nøyaktighet på 24m.) Pass på at du kan se himmelen.");
 			}
-//		} else if (locAccuracy == 0) {
-//			// or if no accuracy data is available
-//			textProgress
-//			.setText("Venter p� GPS... Pass p� at du kan se himmelen.");
+			//		} else if (locAccuracy == 0) {
+			//			// or if no accuracy data is available
+			//			textProgress
+			//			.setText("Venter på GPS... Pass på at du kan se himmelen.");
 		} else {
 			// but if all the requirements have been met, proceed
 			latitude = location.getLatitude();
@@ -613,24 +613,24 @@ public class Home extends Activity {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder
 		.setMessage(
-				"GPS er avsl�tt. Vil du sl� den p� n�?")
-				.setCancelable(false).setPositiveButton("Ja",
-						new DialogInterface.OnClickListener() {
-					public void onClick(
-							@SuppressWarnings("unused") final DialogInterface dialog,
-							@SuppressWarnings("unused") final int id) {
-						Intent j = new Intent();
-						j
-						.setAction("android.settings.LOCATION_SOURCE_SETTINGS");
-						startActivity(j);
-					}
-				}).setNegativeButton("Nei",
-						new DialogInterface.OnClickListener() {
-					public void onClick(final DialogInterface dialog,
-							@SuppressWarnings("unused") final int id) {
-						dialog.cancel();
-					}
-				});
+		"GPS er avslått. Vil du slå den på nå?")
+		.setCancelable(false).setPositiveButton("Ja",
+				new DialogInterface.OnClickListener() {
+			public void onClick(
+					@SuppressWarnings("unused") final DialogInterface dialog,
+					@SuppressWarnings("unused") final int id) {
+				Intent j = new Intent();
+				j
+				.setAction("android.settings.LOCATION_SOURCE_SETTINGS");
+				startActivity(j);
+			}
+		}).setNegativeButton("Nei",
+				new DialogInterface.OnClickListener() {
+			public void onClick(final DialogInterface dialog,
+					@SuppressWarnings("unused") final int id) {
+				dialog.cancel();
+			}
+		});
 		final AlertDialog alert = builder.create();
 		alert.show();
 	}
