@@ -8,13 +8,21 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.multipart.ByteArrayPartSource;
-import org.apache.commons.httpclient.methods.multipart.FilePart;
-import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
-import org.apache.commons.httpclient.methods.multipart.Part;
-import org.apache.commons.httpclient.methods.multipart.StringPart;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.DefaultedHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -436,57 +444,43 @@ public class Home extends Activity {
 	// **********************************************************************
 	private boolean doUploadinBackground() {
 		// Log.d(LOG_TAG, "doUploadinBackground");
-
 		String responseString = null;
-		PostMethod method;
 
-		method = new PostMethod("http://fiksgatami-dev.nuug.no/import");
+		HttpParams params = new  BasicHttpParams();
+		int timeoutConnection = 100000;
+		HttpConnectionParams.setConnectionTimeout(params, timeoutConnection);
 
+		HttpClient httpClient = new DefaultHttpClient(params);
 		try {
-
-			byte[] imageByteArray = null;
-			HttpClient client = new HttpClient();
-			client.getHttpConnectionManager().getParams().setConnectionTimeout(
-					100000);
+			HttpPost httpPost = new HttpPost("http://fiksgatami-dev.nuug.no/import");
 
 			File f = new File(Environment.getExternalStorageDirectory(),
 			"FMS_photo.jpg");
+			
+			MultipartEntity reqEntity = new MultipartEntity();
+			FileBody fb = new FileBody(f);
+			
+			reqEntity.addPart("photo", new FileBody(f, "image/jpeg"));
+			reqEntity.addPart("service", new StringBody("FiksGataMi4Android"));
+			reqEntity.addPart("subject", new StringBody(subject));
+			reqEntity.addPart("name", new StringBody(name));
+			reqEntity.addPart("email", new StringBody(email));             
+			reqEntity.addPart("lat", new StringBody(latString));             
+			reqEntity.addPart("lon", new StringBody(longString));   
 
-			// TODO - add a check here
-			if (!f.exists()) {
+			httpPost.setEntity(reqEntity);
+
+//			Log.i(LOG_TAG,"executing request " + httpPost.getRequestLine());
+			HttpResponse response = httpClient.execute(httpPost);
+
+			HttpEntity resEntity = response.getEntity();
+			responseString = EntityUtils.toString(resEntity);
+			Log.i(LOG_TAG, "Response was " + responseString);
+
+			if (resEntity != null) {
+				System.out.println("Response content length: " + resEntity.getContentLength());
 			}
-			imageByteArray = getBytesFromFile(f);
-
-			// Log
-			// .d(LOG_TAG, "len of data is " + imageByteArray.length
-			// + " bytes");
-
-			FilePart photo = new FilePart("photo", new ByteArrayPartSource(
-					"photo", imageByteArray));
-
-			photo.setContentType("image/jpeg");
-			photo.setCharSet(null);
-
-			Part[] parts = { new StringPart("service", "Android phone"),
-					new StringPart("subject", subject),            
-					new StringPart("name", name),
-					new StringPart("email", email),                
-					new StringPart("lat", latString),              
-					new StringPart("lon", longString), photo };    
-
-			// Log.d(LOG_TAG, "sending off with lat " + latString + " and lon "
-			// + longString);
-
-			method.setRequestEntity(new MultipartRequestEntity(parts, method
-					.getParams()));
-			client.executeMethod(method);
-			responseString = method.getResponseBodyAsString();
-			method.releaseConnection();
-
-			Log.e("httpPost", "Response status: " + responseString);
-			Log.e("httpPost", "Latitude = " + latString + " and Longitude = "
-					+ longString);
-
+			//EntityUtils.consume(resEntity);
 		} catch (Exception ex) {
 			Log.v(LOG_TAG, "Exception", ex);
 			exception_string = ex.getMessage();
@@ -494,10 +488,11 @@ public class Home extends Activity {
 			serverResponse = "";
 			return false;
 		} finally {
-			method.releaseConnection();
+			try { httpClient.getConnectionManager().shutdown(); } catch (Exception ignore) {}
 		}
-
-		if (responseString.equals("SUCCESS")) {
+		// use startswith to workaround bug where CATEGORIES-info
+		// is display on every call to import.cgi
+		if (responseString.startsWith("SUCCESS")) {
 			// launch the Success page
 			globalStatus = SUCCESS;
 			return true;
@@ -507,6 +502,7 @@ public class Home extends Activity {
 			globalStatus = UPLOAD_ERROR;
 			return false;
 		}
+
 	}
 
 	private boolean checkLoc(Location location) {
