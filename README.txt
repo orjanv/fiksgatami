@@ -6,9 +6,8 @@ directly in Eclipse.
 
 However, to compile it as an .apk, you will need to add the following JAR files 
 to your build path - these make the multipart messages work.
-
-- commons-httpclient.jar
-- httpcomponents-client-4.0-alpha4.lib 
+ 
+- httpmime-4.1.1.jar
 
 Hopefully these will no longer be needed in future versions of Android. 
 
