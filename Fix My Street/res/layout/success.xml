@@ -25,7 +25,7 @@
 			android:layout_height="wrap_content" android:paddingBottom="5dip"
 			android:paddingTop="5dip" android:paddingLeft="5dip"
 			android:paddingRight="5dip"
-			android:text="Du vil motta en e-post fra oss snart. Vennligst klikk på lenken for å bekrefte, sjekk åstedet nøye og legg til noen flere detaljer." />
+			android:text="Du vil motta en e-post fra oss snart. Vennligst klikk på lenken for å bekrefte din melding, sjekk området nøye og legg til noen flere detaljer." />
 
 		<TextView android:id="@+id/hello_text" android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:paddingBottom="5dip"
