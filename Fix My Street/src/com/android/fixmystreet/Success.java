@@ -49,6 +49,8 @@ public class Success extends Activity {
 	// disable the Back key in case things get submitted twice
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			Intent i = new Intent(Success.this, Home.class);
+			startActivity(i);
 			return true;
 		}
 		return false;
