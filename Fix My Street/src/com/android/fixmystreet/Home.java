@@ -7,19 +7,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.DefaultedHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
@@ -464,7 +462,7 @@ public class Home extends Activity {
 			reqEntity.addPart("service", new StringBody("FiksGataMi4Android"));
 			reqEntity.addPart("subject", new StringBody(subject));
 			reqEntity.addPart("name", new StringBody(name));
-			reqEntity.addPart("email", new StringBody(email));             
+			reqEntity.addPart("email", new StringBody(email, Charset.forName("UTF-8")));             
 			reqEntity.addPart("lat", new StringBody(latString));             
 			reqEntity.addPart("lon", new StringBody(longString));   
 
