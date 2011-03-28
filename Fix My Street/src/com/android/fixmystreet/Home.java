@@ -457,14 +457,14 @@ public class Home extends Activity {
 			
 			MultipartEntity reqEntity = new MultipartEntity();
 			FileBody fb = new FileBody(f);
-			
+			Charset utf8 =  Charset.forName("UTF-8");
 			reqEntity.addPart("photo", new FileBody(f, "image/jpeg"));
-			reqEntity.addPart("service", new StringBody("FiksGataMi4Android"));
-			reqEntity.addPart("subject", new StringBody(subject));
-			reqEntity.addPart("name", new StringBody(name));
-			reqEntity.addPart("email", new StringBody(email, Charset.forName("UTF-8")));             
-			reqEntity.addPart("lat", new StringBody(latString));             
-			reqEntity.addPart("lon", new StringBody(longString));   
+			reqEntity.addPart("service", new StringBody("FiksGataMi4Android",utf8));
+			reqEntity.addPart("subject", new StringBody(subject,utf8));
+			reqEntity.addPart("name", new StringBody(name,utf8));
+			reqEntity.addPart("email", new StringBody(email, utf8));             
+			reqEntity.addPart("lat", new StringBody(latString,utf8));             
+			reqEntity.addPart("lon", new StringBody(longString,utf8));   
 
 			httpPost.setEntity(reqEntity);
 
