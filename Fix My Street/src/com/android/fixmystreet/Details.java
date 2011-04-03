@@ -96,6 +96,7 @@ public class Details extends Activity {
 						extras.putBoolean("photo", havePicture);
 						i.putExtras(extras);
 						startActivity(i);
+						finish(); // finish this activity som we don't come back here
 					}
 				}
 			}
@@ -116,6 +117,7 @@ public class Details extends Activity {
 	// isValidEmailAddress: Check the email address is OK
 	// **********************************************************************
 	public static boolean isValidEmailAddress(String emailAddress) {
+		// TODO: Do we REALLY want to verify the email on the phone ?
 		String emailRegEx;
 		Pattern pattern;
 		// Regex for a valid email address

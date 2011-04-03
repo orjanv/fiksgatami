@@ -256,6 +256,7 @@ public class Home extends Activity {
 
 				i.putExtras(extras);
 				startActivity(i);
+				finish();
 			}
 		});
 		btnPicture.setOnClickListener(new OnClickListener() {
@@ -356,6 +357,7 @@ public class Home extends Activity {
 			i.putExtra("latString", latString);
 			i.putExtra("lonString", longString);
 			startActivity(i);
+			finish(); // this Home-activity, we don't want to come back here
 		}
 	}
 
@@ -653,6 +655,7 @@ public class Home extends Activity {
 
 	//@Override
 	public void onBackPressed() {
+		// TODO: This dosen't work - we are still sendt back to the last activity
 	    // This will be called either automatically for you on 2.0
 	    // or later, or by the code above on earlier versions of the
 	    // platform.

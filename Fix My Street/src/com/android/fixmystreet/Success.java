@@ -41,6 +41,7 @@ public class Success extends Activity {
 		case 0:
 			Intent i = new Intent(Success.this, Home.class);
 			startActivity(i);
+			finish(); // finish so we don't go back here
 			return true;
 		}
 		return false;
@@ -51,6 +52,7 @@ public class Success extends Activity {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			Intent i = new Intent(Success.this, Home.class);
 			startActivity(i);
+			finish(); // finish so we don't go back here
 			return true;
 		}
 		return false;
