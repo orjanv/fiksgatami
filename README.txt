@@ -13,7 +13,7 @@ This file is a part of HttpClient 4.1.1 from http://hc.apache.org/downloads.cgi
 
 Hopefully it will no longer be needed in future versions of Android. 
 
-I've compiled it against version 1.6 (Cupcake).
+I've compiled it against version 1.6.
 
 Note that the app has to be signed to go onto the Android Market, contact
 anna@mysociety.org to do this.
