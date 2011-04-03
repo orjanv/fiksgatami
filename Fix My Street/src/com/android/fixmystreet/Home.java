@@ -462,7 +462,7 @@ public class Home extends Activity {
 			reqEntity.addPart("service", new StringBody("FiksGataMi4Android",utf8));
 			reqEntity.addPart("subject", new StringBody(subject,utf8));
 			reqEntity.addPart("name", new StringBody(name,utf8));
-			reqEntity.addPart("email", new StringBody(email, utf8));             
+			reqEntity.addPart("email", new StringBody(email,utf8));             
 			reqEntity.addPart("lat", new StringBody(latString,utf8));             
 			reqEntity.addPart("lon", new StringBody(longString,utf8));   
 

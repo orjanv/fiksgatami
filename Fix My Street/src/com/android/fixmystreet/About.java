@@ -31,7 +31,7 @@ public class About extends Activity {
 		// add links
 		TextView noteView = (TextView) findViewById(R.id.faq);
 		TextView noteView2 = (TextView) findViewById(R.id.faq2);
-		noteView2.setText("Dette er versjon " + versionName + " av FiksGataMi for Android, skrevet av Anna Powell-Smith, oversatt til Norsk av Ørjan Hoyd Vøllestad. Takk til Paul for testing.");
+		noteView2.setText("Dette er versjon " + versionName + " av FiksGataMi for Android, skrevet av Anna Powell-Smith, oversatt til Norsk av ï¿½rjan Hoyd Vï¿½llestad. Takk til Paul for testing.");
 		Linkify.addLinks(noteView, Linkify.ALL);
 	}
 
