@@ -43,6 +43,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -638,6 +639,27 @@ public class Home extends Activity {
 		// Log.d(LOG_TAG, "Removed " + listener.toString());
 	}
 
+	public boolean onKeyDown(int keyCode, KeyEvent event)  {
+	    if (  Integer.valueOf(android.os.Build.VERSION.SDK) < 7 //Instead use android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.ECLAIR
+	            && keyCode == KeyEvent.KEYCODE_BACK
+	            && event.getRepeatCount() == 0) {
+	        // Take care of calling this method on earlier versions of
+	        // the platform where it doesn't exist.
+	        onBackPressed();
+	    }
+
+	    return super.onKeyDown(keyCode, event);
+	}
+
+	//@Override
+	public void onBackPressed() {
+	    // This will be called either automatically for you on 2.0
+	    // or later, or by the code above on earlier versions of the
+	    // platform.
+		finish(); // Close application on back-press
+	    return;
+	}
+	
 	// ****************************************************
 	// Options menu functions
 	// ****************************************************
