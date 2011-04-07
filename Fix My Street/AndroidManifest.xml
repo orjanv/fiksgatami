@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- version info etc -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.android.fixmystreet" android:versionCode="17"
-	android:versionName="1.35">
+	package="com.android.fixmystreet" android:versionCode="17" android:versionName="1.36">
 
 <uses-sdk android:minSdkVersion="4" />
 	<!-- Permissions -->
