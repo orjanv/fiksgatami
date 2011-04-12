@@ -453,7 +453,7 @@ public class Home extends Activity {
 
 		HttpClient httpClient = new DefaultHttpClient(params);
 		try {
-			HttpPost httpPost = new HttpPost("http://fiksgatami.no/import");
+			HttpPost httpPost = new HttpPost(getString(R.string.postURL));
 
 			File f = new File(Environment.getExternalStorageDirectory(),
 			"FMS_photo.jpg");

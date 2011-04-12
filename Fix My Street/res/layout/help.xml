@@ -22,7 +22,7 @@
 
 		<TextView android:id="@+id/faq" android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:text="For andre spørsmål, se http://www.fiksgatami.no/faq, eller send en e-post til orjanv@droidnytt.no."
+			android:text="For andre spørsmål, se http://www.fiksgatami.no/faq, eller legg inn en sak på https://github.com/orjanv/fiksgatami/issues"
 			android:paddingBottom="5dip" android:paddingTop="5dip"
 			android:paddingLeft="5dip" android:paddingRight="5dip"
 			android:textStyle="bold" android:linksClickable="true" />
