@@ -22,16 +22,38 @@
 
 		<TextView android:id="@+id/faq" android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:text="FiksGataMi er i hovedsak et nettsted, som drives av Foreningen Norsk Unix User Group (NUUG). For mer informasjon, gå til http://www.fiksgatami.no/faq."
+			android:text="FiksGataMi er i hovedsak et nettsted som drives av Foreningen Norsk Unix User Group (NUUG). For mer informasjon, gå til http://www.fiksgatami.no/faq"
 			android:paddingBottom="5dip" android:paddingLeft="5dip"
 			android:paddingRight="5dip" android:linksClickable="true" />
 
+<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="Hva er FiksGataMi for Android?"
+			android:paddingBottom="5dip" android:paddingTop="5dip"
+			android:paddingLeft="5dip" android:paddingRight="5dip"
+			android:textStyle="bold" />
 
 		<TextView android:id="@+id/faq2" android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:text=""
 			android:paddingBottom="5dip" android:paddingLeft="5dip"
 			android:paddingRight="5dip" android:linksClickable="true" />
+			
+		<ToggleButton android:textOff="@string/viewLicenseApp" android:textOn="@string/hideLicenseApp" android:id="@+id/btnViewLicApp" android:layout_width="fill_parent" android:layout_height="wrap_content"></ToggleButton>
+
+	<TextView android:id="@+id/licApp" android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text=""
+			android:paddingBottom="5dip" android:paddingLeft="5dip"
+			android:paddingRight="5dip" android:linksClickable="true" android:visibility="gone"/>
+
+<ToggleButton android:id="@+id/btnViewLicLib" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textOff="@string/viewLicenseLib" android:textOn="@string/hideLicenseLib"></ToggleButton>
+
+	<TextView android:id="@+id/licLib" android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text=""
+			android:paddingBottom="5dip" android:paddingLeft="5dip"
+			android:paddingRight="5dip" android:linksClickable="true" android:visibility="gone"/>
+	
 
 		<TextView android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:text=" "
