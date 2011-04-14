@@ -6,7 +6,7 @@
     <!-- About screen -->
  <string name="instructions">1. Trykk på \'Ta bilde\', så på kamera-knappen for å ta et bilde.\n2. Trykk på \'Legg til detaljer\', gi så rapporten et navn (f.e. \'Ødelagt gatelykt\'), skriv inn ditt navn og din e-postadresse. \n3. Vent på GPS signal (det tar lengre tid hvis det er overskyet). Trykk så på \'Rapporter\' knappen for å laste opp til FiksGataMi. \n4. Sjekk innboksen din. Du må bekrefte problemet og legge til noen få detaljer til.</string>
 
-<string name="copyright">Dette er versjon %1$s av FiksGataMi for Android, som lar deg rapportere problemer til FiksGataMi ved hjelp av telefonen din. Programmet er skrevet av Anna Powell-Smith, Anders Einar Hilden, og Ørjan Vøllestad.\n\nProblemer med FiksGataMi for Android kan rapporteres på https://github.com/orjanv/fiksgatami/issues\n\nFiksGataMi er lisensiert under GNU Affero General Public License, og bruker deler av HttpClient 4.1.1 ( http://hc.apache.org/index.html ) som er lisensiert under Apache License, Version 2.0</string>
+<string name="copyright">Dette er versjon %1$s av FiksGataMi for Android, som lar deg rapportere problemer til FiksGataMi ved hjelp av telefonen din. Programmet er skrevet av Anna Powell-Smith, Anders Einar Hilden, og Ørjan Vøllestad.\n\nProblemer med FiksGataMi for Android kan rapporteres på https://github.com/Kagee/fixmystreet/issues\n\nFiksGataMi er lisensiert under GNU Affero General Public License, og bruker deler av HttpClient 4.1.1 ( http://hc.apache.org/index.html ) som er lisensiert under Apache License, Version 2.0</string>
 
 <string name="viewLicenseLib">Vis lisens for HttpClient 4.1.1</string>
 
