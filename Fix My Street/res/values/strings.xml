@@ -11,8 +11,8 @@
 <string name="viewLicenseLib">Vis lisens for HttpClient 4.1.1</string>
 
 <string name="viewLicenseApp">Vis programlisens</string>
-<!--  <string name="postURL">http://fiksgatami-dev.nuug.no/import</string>  -->
-<string name="postURL">http://fiksgatami.no/import</string>
+<string name="postURL">http://fiksgatami-dev.nuug.no/import</string>
+<!--  <string name="postURL">http://fiksgatami.no/import</string>  -->
 <string name="hideLicenseLib">Skjul lisens for HttpClient 4.1.1</string>
 
 <string name="hideLicenseApp">Skjul programlisens</string>
