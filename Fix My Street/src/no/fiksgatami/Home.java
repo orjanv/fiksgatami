@@ -51,7 +51,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class Home extends Activity {
+public class Home extends BaseActivity {
 	// ****************************************************
 	// Local variables
 	// ****************************************************
@@ -215,7 +215,7 @@ public class Home extends Activity {
 				// envelope.setBounds(0, 0, envelope.getIntrinsicWidth(),
 				// envelope
 				// .getIntrinsicHeight());
-				btnDetails.setText("Detaljer lagt til: '" + subject + "'");
+				btnDetails.setText(String.format(getString(R.string.subject_details_added), subject));
 				btnDetails.setCompoundDrawables(null, null, checked, null);
 			} else {
 				// Log.d(LOG_TAG, "Don't have details");
@@ -234,7 +234,7 @@ public class Home extends Activity {
 			// camera.setBounds(0, 0, camera.getIntrinsicWidth(), camera
 			// .getIntrinsicHeight());
 			btnPicture.setCompoundDrawables(null, null, checked, null);
-			btnPicture.setText("Bilde tatt");
+			btnPicture.setText(R.string.picture_taken);
 		}
 		if (havePicture && haveDetails) {
 			textProgress.setVisibility(View.VISIBLE);
@@ -271,7 +271,7 @@ public class Home extends Activity {
 						MediaStore.ACTION_IMAGE_CAPTURE);
 				imageCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri
 						.fromFile(photo));
-				startActivityForResult(imageCaptureIntent, 1);
+				startActivityForResult(imageCaptureIntent, REQUEST_UPLOAD_PICTURE);
 			}
 		});
 		btnReport.setOnClickListener(new OnClickListener() {
@@ -288,7 +288,7 @@ public class Home extends Activity {
 		// Log.d(LOG_TAG, "Activity.RESULT_OK code = " + Activity.RESULT_OK);
 		// Log.d(LOG_TAG, "resultCode = " + resultCode + "requestCode = "
 		// + requestCode);
-		if (resultCode == Activity.RESULT_OK && requestCode == 1) {
+		if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_UPLOAD_PICTURE) {
 			havePicture = true;
 			extras.putBoolean("photo", true);
 			Resources res = getResources();
@@ -296,7 +296,7 @@ public class Home extends Activity {
 			checked.setBounds(0, 0, checked.getIntrinsicWidth(), checked
 					.getIntrinsicHeight());
 			btnPicture.setCompoundDrawables(null, null, checked, null);
-			btnPicture.setText("Bilde tatt");
+			btnPicture.setText(R.string.picture_taken);
 		}
 		Log.d(LOG_TAG, "havePicture = " + havePicture.toString());
 	}
@@ -330,8 +330,8 @@ public class Home extends Activity {
 		pd = ProgressDialog
 		.show(
 				this,
-				"Laster opp, vennligst vent...",
-				"Laster opp. Dette kan ta opptil ett minutt, avhengig av tilkobling din. Vær tålmodig!",
+				getString(R.string.progress_uploading_title),
+				getString(R.string.progress_uploading),
 				true, false);
 		Thread t = new Thread() {
 			public void run() {
@@ -369,73 +369,66 @@ public class Home extends Activity {
 		switch (id) {
 		case COUNTRY_ERROR:
 			return new AlertDialog.Builder(Home.this)
-			.setTitle("Sted eller nettverksfeil")
-			.setPositiveButton("OK",
-					new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,
-						int whichButton) {
-				}
-			})
-			.setMessage(
-			"Beklager, FiksGataMi fungerer bare i Norge. Du kan ikke rapportere fra der du befinner deg. (Du kan også se denne feilmeldingen om du ikke er tilkoblet internett)")
+			.setTitle(R.string.dialog_country_error_title)
+			.setPositiveButton(R.string.common_ok,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                            int whichButton) {
+                        }
+                    })
+			.setMessage(R.string.dialog_country_error)
 			.create();
 		case UPLOAD_ERROR:
 			return new AlertDialog.Builder(Home.this)
-			.setTitle("Feil ved opplasting")
-			.setPositiveButton("OK",
-					new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,
-						int whichButton) {
-				}
-			})
-			.setMessage(
-					"Beklager, det skjedde en feil under opplasting - kanskje du er uten nettverkstilgang? Vennligst prøv igjen senere. Exception: " + exception_string + " " + serverResponse)
-					.create();
+			.setTitle(R.string.dialog_upload_error_title)
+			.setPositiveButton(R.string.common_ok,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                            int whichButton) {
+                        }
+                    })
+			.setMessage(String.format(getString(R.string.dialog_upload_error), exception_string, serverResponse)).create();
 		case UPLOAD_ERROR_SERVER:
 			return new AlertDialog.Builder(Home.this)
-			.setTitle("Feil ved opplasting")
-			.setPositiveButton("OK",
+			.setTitle(R.string.dialog_upload_server_error_title)
+			.setPositiveButton(R.string.common_ok,
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,
 						int whichButton) {
 				}
 			})
-			.setMessage(
-					"Beklager, det skjedde en feil under opplasting. Vennligst prøv igjen senere. Melding fra server: "
-					+ serverResponse).create();
+			.setMessage(String.format(getString(R.string.dialog_upload_server_error, serverResponse))).create();
+
 		case LOCATION_NOT_FOUND:
 			return new AlertDialog.Builder(Home.this)
-			.setTitle("Feil med sted")
-			.setPositiveButton("OK",
+			.setTitle(R.string.dialog_gps_no_location_title)
+			.setPositiveButton(R.string.common_ok,
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,
 						int whichButton) {
 				}
 			})
-			.setMessage(
-			"Kunne ikke lokalisere sted! Kan du se himmelen? Vennligst prøv igjen senere.")
+			.setMessage(R.string.dialog_gps_no_location)
 			.create();
 		case PHOTO_NOT_FOUND:
-			return new AlertDialog.Builder(Home.this).setTitle("Ingen bilde")
-			.setPositiveButton("OK",
+			return new AlertDialog.Builder(Home.this).setTitle(R.string.dialog_picture_not_found_title)
+			.setPositiveButton(R.string.common_ok,
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,
 						int whichButton) {
 				}
-			}).setMessage("Bilde ikke funnet!").create();
+			}).setMessage(R.string.dialog_picture_not_found).create();
 		case UPON_UPDATE:
 			if (versionName == null) {
 				versionName = "";
 			}
-			return new AlertDialog.Builder(Home.this).setTitle("Hva er nytt?")
-			.setPositiveButton("OK",
+			return new AlertDialog.Builder(Home.this).setTitle(R.string.app_update__whats_new_title)
+			.setPositiveButton(R.string.common_ok,
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,
 						int whichButton) {
 				}
-			}).setMessage(
-					"Nytt i versjon" + versionName
-					+ ": bedre GPS posisjonering.").create();
+			}).setMessage(String.format(getString(R.string.app_update__whats_new_details, versionName))).create();
 		}
 		return null;
 	}
@@ -532,12 +525,10 @@ public class Home extends Activity {
 				// nor do we want to report if the GPS time hasn't changed at
 				// all - it is probably out of date
 				textProgress
-				.setText("Venter på GPS: telefonen sier siste tilkobling er for gammel. Pass på at du kan se himmelen.");
+				.setText(R.string.gps_wait_expired_gps_position);
 			} else {
 				textProgress
-				.setText("Venter på GPS: telefonen sier at siste målte nøyaktighet var "
-						+ locAccuracy
-						+ "m. (Vi trenger en nøyaktighet på 24m.) Pass på at du kan se himmelen.");
+				.setText(String.format(getString(R.string.gps_wait_require_more_accuracy), locAccuracy));
 			}
 			//		} else if (locAccuracy == 0) {
 			//			// or if no accuracy data is available
@@ -551,10 +542,10 @@ public class Home extends Activity {
 			longString = longitude.toString();
 			if (haveDetails && havePicture) {
 				btnReport.setVisibility(View.VISIBLE);
-				btnReport.setText("GPS signal funnet! Rapporter til FiksGataMi");
+				btnReport.setText(R.string.gps_signal_found_please_report_now);
 				textProgress.setVisibility(View.GONE);
 			} else {
-				textProgress.setText("GPS signal funnet!");
+				textProgress.setText(R.string.gps_signal_found);
 			}
 			previousGPSFixTime = latestGPSFixTime;
 			return true;
@@ -609,9 +600,8 @@ public class Home extends Activity {
 	private void buildAlertMessageNoGps() {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder
-		.setMessage(
-		"GPS kreves for å levere rapporter. Vil du slå den på nå?")
-		.setCancelable(false).setPositiveButton("Ja",
+		.setMessage(R.string.gps_activate_for_deliveries)
+		.setCancelable(false).setPositiveButton(R.string.common_yes,
 				new DialogInterface.OnClickListener() {
 			public void onClick(
 					final DialogInterface dialog,
@@ -621,13 +611,13 @@ public class Home extends Activity {
 				.setAction("android.settings.LOCATION_SOURCE_SETTINGS");
 				startActivity(j);
 			}
-		}).setNegativeButton("Nei",
-				new DialogInterface.OnClickListener() {
-			public void onClick(final DialogInterface dialog,
-					final int id) {
-				dialog.cancel();
-			}
-		});
+		}).setNegativeButton(R.string.common_no,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog,
+                                        final int id) {
+                        dialog.cancel();
+                    }
+                });
 		final AlertDialog alert = builder.create();
 		alert.show();
 	}
@@ -671,8 +661,8 @@ public class Home extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem helpItem = menu.add(0, 0, 0, "Hjelp");
-		MenuItem aboutItem = menu.add(0, 1, 0, "Om");
+		MenuItem helpItem = menu.add(Menu.NONE, MENU_HELP, Menu.NONE, R.string.menu_help);
+		MenuItem aboutItem = menu.add(Menu.NONE, MENU_ABOUT, Menu.NONE, R.string.menu_about);
 		aboutItem.setIcon(android.R.drawable.ic_menu_info_details);
 		helpItem.setIcon(android.R.drawable.ic_menu_help);
 		return true;
@@ -681,14 +671,14 @@ public class Home extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case 0:
+		case MENU_HELP:
 			Intent i = new Intent(Home.this, Help.class);
 			if (extras != null) {
 				i.putExtras(extras);
 			}
 			startActivity(i);
 			return true;
-		case 1:
+		case MENU_ABOUT:
 			Intent j = new Intent(Home.this, About.class);
 			if (extras != null) {
 				j.putExtras(extras);

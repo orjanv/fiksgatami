@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class Help extends Activity {
+public class Help extends BaseActivity {
 	private Bundle extras = null;
 
 	@Override
@@ -29,8 +29,8 @@ public class Help extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem homeItem = menu.add(0, 0, 0, "Hjem");
-		MenuItem aboutItem = menu.add(0, 1, 0, "Om");
+		MenuItem homeItem = menu.add(Menu.NONE, MENU_HOME, Menu.NONE, R.string.menu_home);
+		MenuItem aboutItem = menu.add(Menu.NONE, MENU_ABOUT, Menu.NONE, R.string.menu_about);
 		homeItem.setIcon(android.R.drawable.ic_menu_edit);
 		aboutItem.setIcon(android.R.drawable.ic_menu_info_details);
 

@@ -11,7 +11,8 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Success extends Activity {
+public class Success extends BaseActivity {
+
 
 	//private static final String LOG_TAG = "Success";
 
@@ -29,7 +30,7 @@ public class Success extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem helpItem = menu.add(0, 0, 0, "Hjem");
+		MenuItem helpItem = menu.add(Menu.NONE, MENU_HOME, Menu.NONE, R.string.menu_home);
 		helpItem.setIcon(android.R.drawable.ic_menu_edit);
 		return true;
 	}

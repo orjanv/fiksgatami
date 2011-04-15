@@ -17,7 +17,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-public class About extends Activity {
+public class About extends BaseActivity {
 
 	private Bundle extras = null;
 	String versionName = "";
@@ -91,8 +91,8 @@ public class About extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem homeItem = menu.add(0, 0, 0, "Hjem");
-		MenuItem aboutItem = menu.add(0, 1, 0, "Hjelp");
+		MenuItem homeItem = menu.add(Menu.NONE, MENU_HOME, Menu.NONE, R.string.menu_home);
+		MenuItem aboutItem = menu.add(Menu.NONE, MENU_HELP, Menu.NONE, R.string.menu_help);
 		aboutItem.setIcon(android.R.drawable.ic_menu_info_details);
 		homeItem.setIcon(android.R.drawable.ic_menu_edit);
 		return true;
@@ -101,14 +101,14 @@ public class About extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case 0:
+		case MENU_HOME:
 			Intent i = new Intent(About.this, Home.class);
 			if (extras != null) {
 				i.putExtras(extras);
 			}
 			startActivity(i);
 			return true;
-		case 1:
+		case MENU_HELP:
 			Intent j = new Intent(About.this, Help.class);
 			if (extras != null) {
 				j.putExtras(extras);

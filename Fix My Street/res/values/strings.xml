@@ -1,20 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!-- Welcome screen -->
+    <!-- Welcome screen -->
     <string name="app_name">FiksGataMi</string>
 
     <!-- About screen -->
- <string name="instructions">1. Trykk på \'Ta bilde\', så på kamera-knappen for å ta et bilde.\n2. Trykk på \'Legg til detaljer\', gi så rapporten et navn (f.e. \'Ødelagt gatelykt\'), skriv inn ditt navn og din e-postadresse. \n3. Vent på GPS signal (det tar lengre tid hvis det er overskyet). Trykk så på \'Rapporter\' knappen for å laste opp til FiksGataMi. \n4. Sjekk innboksen din. Du må bekrefte problemet og legge til noen få detaljer til.</string>
+    <string name="instructions">1. Trykk på \'Ta bilde\', så på kamera-knappen for å ta et bilde.\n2. Trykk på \'Legg
+        til detaljer\', gi så rapporten et navn (f.e. \'Ødelagt gatelykt\'), skriv inn ditt navn og din e-postadresse.
+        \n3. Vent på GPS signal (det tar lengre tid hvis det er overskyet). Trykk så på \'Rapporter\' knappen for å
+        laste opp til FiksGataMi. \n4. Sjekk innboksen din. Du må bekrefte problemet og legge til noen få detaljer til.
+    </string>
 
-<string name="copyright">Dette er versjon %1$s av FiksGataMi for Android, som lar deg rapportere problemer til FiksGataMi ved hjelp av telefonen din. Programmet er skrevet av Anna Powell-Smith, Anders Einar Hilden, og Ørjan Vøllestad.\n\nProblemer med FiksGataMi for Android kan rapporteres på https://github.com/orjanv/fiksgatami/issues\n\nFiksGataMi er lisensiert under GNU Affero General Public License, og bruker deler av HttpClient 4.1.1 ( http://hc.apache.org/index.html ) som er lisensiert under Apache License, Version 2.0</string>
+    <string name="copyright">Dette er versjon %1$s av FiksGataMi for Android, som lar deg rapportere problemer til
+        FiksGataMi ved hjelp av telefonen din. Programmet er skrevet av Anna Powell-Smith, Anders Einar Hilden, og Ørjan
+        Vøllestad.\n\nProblemer med FiksGataMi for Android kan rapporteres på
+        https://github.com/orjanv/fiksgatami/issues\n\nFiksGataMi er lisensiert under GNU Affero General Public License,
+        og bruker deler av HttpClient 4.1.1 ( http://hc.apache.org/index.html ) som er lisensiert under Apache License,
+        Version 2.0
+    </string>
 
-<string name="viewLicenseLib">Vis lisens for HttpClient 4.1.1</string>
+    <string name="viewLicenseLib">Vis lisens for HttpClient 4.1.1</string>
 
-<string name="viewLicenseApp">Vis programlisens</string>
-<!--  <string name="postURL">http://fiksgatami-dev.nuug.no/import</string>  -->
-<string name="postURL">http://fiksgatami.no/import</string>
-<string name="hideLicenseLib">Skjul lisens for HttpClient 4.1.1</string>
+    <string name="viewLicenseApp">Vis programlisens</string>
+    <!--  <string name="postURL">http://fiksgatami-dev.nuug.no/import</string>  -->
+    <string name="postURL">http://fiksgatami.no/import</string>
+    <string name="hideLicenseLib">Skjul lisens for HttpClient 4.1.1</string>
 
-<string name="hideLicenseApp">Skjul programlisens</string>
+    <string name="hideLicenseApp">Skjul programlisens</string>
 
+
+
+    <string name="picture_taken">Bilde tatt</string>
+
+    <string name="menu_home">Hjem</string>
+    <string name="menu_help">Hjelp</string>
+    <string name="menu_about">Om</string>
+
+    <string name="subject">Emne</string>
+    <string name="subject_warning">Skriv hva det handler om!</string>
+    <string name="subject_details_added">Detaljer lagt til: \'%1$s\'</string>
+
+    <string name="name">Navn</string>
+    <string name="name_warning">Skriv inn navnet ditt. Det blir husket til neste gang.</string>
+    <string name="email">E-post</string>
+    <string name="email_warning">Skriv inn en gyldig e-postadresse. Den blir husket til neste gang.</string>
+    <string name="common_ok">OK</string>
+    <string name="common_yes">Ja</string>
+    <string name="common_no">Nei</string>
+
+    <string name="gps_signal_found">GPS signal funnet!</string>
+    <string name="gps_signal_found_please_report_now">GPS signal funnet! Rapporter til FiksGataMi</string>
+    <string name="gps_wait_require_more_accuracy">Venter på GPS: telefonen sier at siste målte nøyaktighet var %1$d m. (Vi trenger en nøyaktighet på 24m.) Pass på at du kan se himmelen.</string>
+    <string name="gps_wait_expired_gps_position">Venter på GPS: telefonen sier siste tilkobling er for gammel. Pass på at du kan se himmelen.</string>
+
+    <string name="gps_activate_for_deliveries">GPS kreves for å levere rapporter. Vil du slå den på nå?</string>
+
+    <string name="app_update__whats_new_title">Hva er nytt?</string>
+    <string name="app_update__whats_new_details">Nytt i versjon %s : bedre GPS posisjonering.</string>
+
+    <string name="dialog_picture_not_found_title">Ingen bilde</string>
+    <string name="dialog_picture_not_found">Bilde ikke funnet!</string>
+    <string name="dialog_gps_no_location_title">Feil med lokalisering</string>
+    <string name="dialog_gps_no_location">Kunne ikke lokalisere sted! Kan du se himmelen? Vennligst prøv igjen senere.</string>
+
+    <string name="dialog_country_error_title">Sted eller nettverksfeil</string>
+    <string name="dialog_country_error">Beklager, FiksGataMi fungerer bare i Norge. Du kan ikke rapportere fra der du befinner deg. (Du kan også se denne feilmeldingen om du ikke er tilkoblet internett)</string>
+
+    <string name="dialog_upload_error_title">Feil ved opplasting</string>
+    <string name="dialog_upload_error">Beklager, det skjedde en feil under opplasting - kanskje du er uten nettverkstilgang? Vennligst prøv igjen senere. Exception: %1$s %2$s</string>
+
+    <string name="dialog_upload_server_error_title">Feil ved opplasting</string>
+    <string name="dialog_upload_server_error">Beklager, det skjedde en feil under opplasting. Vennligst prøv igjen senere. Melding fra server: %1$s</string>
+
+
+    <string name="progress_uploading_title">Laster opp, vennligst vent...</string>
+    <string name="progress_uploading">Laster opp. Dette kan ta opptil ett minutt, avhengig av tilkobling din. Vær tålmodig!</string>
 </resources>

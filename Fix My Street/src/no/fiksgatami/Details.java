@@ -139,37 +139,35 @@ public class Details extends Activity {
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case SUBJECT_WARNING:
-			return new AlertDialog.Builder(Details.this).setTitle("Emne")
-					.setPositiveButton("OK",
+			return new AlertDialog.Builder(Details.this).setTitle(R.string.subject)
+					.setPositiveButton(R.string.common_ok,
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int whichButton) {
 								}
-							}).setMessage("Skriv hva det handler om!").create();
+							}).setMessage(R.string.subject_warning).create();
 		case NAME_WARNING:
 			return new AlertDialog.Builder(Details.this)
-					.setTitle("Navn")
-					.setPositiveButton("OK",
+					.setTitle(R.string.name)
+					.setPositiveButton(R.string.common_ok,
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int whichButton) {
 								}
 							})
-					.setMessage(
-							"Skriv inn navnet ditt. Det blir husket til neste gang.")
+					.setMessage(R.string.name_warning)
 					.create();
 
 		case EMAIL_WARNING:
 			return new AlertDialog.Builder(Details.this)
-					.setTitle("E-post")
-					.setPositiveButton("OK",
+					.setTitle(R.string.email)
+					.setPositiveButton(R.string.common_ok,
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int whichButton) {
 								}
 							})
-					.setMessage(
-							"Skriv inn en gyldig e-postadresse. Den blir husket til neste gang.")
+					.setMessage(R.string.email_warning)
 					.create();
 
 		}
