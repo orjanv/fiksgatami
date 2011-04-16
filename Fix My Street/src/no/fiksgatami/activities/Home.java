@@ -255,7 +255,6 @@ public class Home extends Base {
 
 				i.putExtras(extras);
 				startActivity(i);
-				finish();
 			}
 		});
 		btnPicture.setOnClickListener(new OnClickListener() {
@@ -651,7 +650,7 @@ public class Home extends Base {
 		finish(); // Close application on back-press
 	    return;
 	}
-	
+
 	// ****************************************************
 	// Options menu functions
 	// ****************************************************
