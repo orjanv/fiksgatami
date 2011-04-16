@@ -1,6 +1,6 @@
-* Include required (if any) lisence-teksts in application About-screen
-* Improwe application flow
+* Include required (if any) lisence-teksts in application About-screen (done, update if anything changes)
+* Improve application flow
+* Allow user to input details before sending (possible with current import.cgi)
 * Allow user to select point from map, do not force GPS
-* Allow user to input details before sending
-* Allow user to select category before sending.
 * Allow user to turn on GPS while it waits for GPS signal
+* Allow user to select category before sending. (requires dev-only import.cgi, use category=1 and supply lon/lat)
