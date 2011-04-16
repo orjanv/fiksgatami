@@ -21,12 +21,11 @@
     <string name="viewLicenseLib">Vis lisens for HttpClient 4.1.1</string>
 
     <string name="viewLicenseApp">Vis programlisens</string>
-    <!--  <string name="postURL">http://fiksgatami-dev.nuug.no/import</string>  -->
-    <string name="postURL">http://fiksgatami.no/import</string>
+    <string name="postURL">http://fiksgatami-dev.nuug.no/import</string>
+    <!--  <string name="postURL">http://fiksgatami.no/import</string>  -->
     <string name="hideLicenseLib">Skjul lisens for HttpClient 4.1.1</string>
 
     <string name="hideLicenseApp">Skjul programlisens</string>
-
 
 
     <string name="picture_taken">Bilde tatt</string>
@@ -49,8 +48,12 @@
 
     <string name="gps_signal_found">GPS signal funnet!</string>
     <string name="gps_signal_found_please_report_now">GPS signal funnet! Rapporter til FiksGataMi</string>
-    <string name="gps_wait_require_more_accuracy">Venter på GPS: telefonen sier at siste målte nøyaktighet var %1$d m. (Vi trenger en nøyaktighet på 24m.) Pass på at du kan se himmelen.</string>
-    <string name="gps_wait_expired_gps_position">Venter på GPS: telefonen sier siste tilkobling er for gammel. Pass på at du kan se himmelen.</string>
+    <string name="gps_wait_require_more_accuracy">Venter på GPS: telefonen sier at siste målte nøyaktighet var %1$d m.
+        (Vi trenger en nøyaktighet på 24m.) Pass på at du kan se himmelen.
+    </string>
+    <string name="gps_wait_expired_gps_position">Venter på GPS: telefonen sier siste tilkobling er for gammel. Pass på
+        at du kan se himmelen.
+    </string>
 
     <string name="gps_activate_for_deliveries">GPS kreves for å levere rapporter. Vil du slå den på nå?</string>
 
@@ -60,20 +63,29 @@
     <string name="dialog_picture_not_found_title">Ingen bilde</string>
     <string name="dialog_picture_not_found">Bilde ikke funnet!</string>
     <string name="dialog_gps_no_location_title">Feil med lokalisering</string>
-    <string name="dialog_gps_no_location">Kunne ikke lokalisere sted! Kan du se himmelen? Vennligst prøv igjen senere.</string>
+    <string name="dialog_gps_no_location">Kunne ikke lokalisere sted! Kan du se himmelen? Vennligst prøv igjen senere.
+    </string>
 
     <string name="dialog_country_error_title">Sted eller nettverksfeil</string>
-    <string name="dialog_country_error">Beklager, FiksGataMi fungerer bare i Norge. Du kan ikke rapportere fra der du befinner deg. (Du kan også se denne feilmeldingen om du ikke er tilkoblet internett)</string>
+    <string name="dialog_country_error">Beklager, FiksGataMi fungerer bare i Norge. Du kan ikke rapportere fra der du
+        befinner deg. (Du kan også se denne feilmeldingen om du ikke er tilkoblet internett)
+    </string>
 
     <string name="dialog_upload_error_title">Feil ved opplasting</string>
-    <string name="dialog_upload_error">Beklager, det skjedde en feil under opplasting - kanskje du er uten nettverkstilgang? Vennligst prøv igjen senere. Exception: %1$s %2$s</string>
+    <string name="dialog_upload_error">Beklager, det skjedde en feil under opplasting - kanskje du er uten
+        nettverkstilgang? Vennligst prøv igjen senere. Exception: %1$s %2$s
+    </string>
 
     <string name="dialog_upload_server_error_title">Feil ved opplasting</string>
-    <string name="dialog_upload_server_error">Beklager, det skjedde en feil under opplasting. Vennligst prøv igjen senere. Melding fra server: %1$s</string>
+    <string name="dialog_upload_server_error">Beklager, det skjedde en feil under opplasting. Vennligst prøv igjen
+        senere. Melding fra server: %1$s
+    </string>
 
 
     <string name="progress_uploading_title">Laster opp, vennligst vent...</string>
-    <string name="progress_uploading">Laster opp. Dette kan ta opptil ett minutt, avhengig av tilkobling din. Vær tålmodig!</string>
+    <string name="progress_uploading">Laster opp. Dette kan ta opptil ett minutt, avhengig av tilkobling din. Vær
+        tålmodig!
+    </string>
 
     <string name="activity_details">FiksGataMi - legg til detaljer</string>
     <string name="activity_success">FiksGataMi - Suksess</string>
