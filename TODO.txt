@@ -4,3 +4,9 @@
 * Allow user to select point from map, do not force GPS
 * Allow user to turn on GPS while it waits for GPS signal
 * Allow user to select category before sending. (requires dev-only import.cgi, use category=1 and supply lon/lat)
+
+* Improve flow - when you start the app, there should really be a 
+welcome message explaning what FMS is, and a "Click here to take 
+a photo" button, then after the photo a "Now add your details" screen. 
+At the moment the opening screen doesn't really make sense unless you
+already know what FixMyStreet is - it should be more welcoming.
