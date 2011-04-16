@@ -74,4 +74,10 @@
 
     <string name="progress_uploading_title">Laster opp, vennligst vent...</string>
     <string name="progress_uploading">Laster opp. Dette kan ta opptil ett minutt, avhengig av tilkobling din. Vær tålmodig!</string>
+
+    <string name="activity_details">FiksGataMi - legg til detaljer</string>
+    <string name="activity_success">FiksGataMi - Suksess</string>
+    <string name="activity_about">FiksGataMi - Om</string>
+    <string name="activity_help">FiksGataMi - Hjelp</string>
+
 </resources>

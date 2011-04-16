@@ -1,4 +1,4 @@
-package no.fiksgatami;
+package no.fiksgatami.activities;
 
 import android.app.Activity;
 
@@ -7,7 +7,7 @@ import android.app.Activity;
  *         Date: 15.04.11
  *         Time: 22:49
  */
-public class BaseActivity extends Activity {
+public class Base extends Activity {
     protected static final int MENU_HOME = 0;
     protected static final int MENU_HELP = 1;
     protected static final int MENU_ABOUT = 2;
