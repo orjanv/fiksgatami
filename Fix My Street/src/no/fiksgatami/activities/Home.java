@@ -7,20 +7,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
+import java.util.List;
 
 import no.fiksgatami.R;
+import no.fiksgatami.utils.CommonUtil;
+import no.fiksgatami.utils.HttpUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 import android.app.AlertDialog;
@@ -104,8 +97,9 @@ public class Home extends Base {
 	private Bundle extras;
 	private TextView textProgress;
 	private String exception_string = "";
+    private List<String> categories;
 
-	// Called when the activity is first created
+    // Called when the activity is first created
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
@@ -331,14 +325,19 @@ public class Home extends Base {
 				getString(R.string.progress_uploading_title),
 				getString(R.string.progress_uploading),
 				true, false);
-		Thread t = new Thread() {
-			public void run() {
-				doUploadinBackground();
-				mHandler.post(mUpdateResults);
-			}
-		};
-		t.start();
+		mHandler.post(uploadToFMS);
 	}
+
+    private Runnable uploadToFMS = new Runnable() {
+        @Override
+        public void run() {
+            doUploadinBackground();
+            mHandler.post(mUpdateResults);
+
+        }
+    };
+
+
 
 	private void updateResultsInUi() {
 		if (globalStatus == UPLOAD_ERROR) {
@@ -355,7 +354,6 @@ public class Home extends Base {
 			i.putExtra("latString", latString);
 			i.putExtra("lonString", longString);
 			startActivity(i);
-			finish(); // this Home-activity, we don't want to come back here
 		}
 	}
 
@@ -438,64 +436,55 @@ public class Home extends Base {
 		// Log.d(LOG_TAG, "doUploadinBackground");
 		String responseString = null;
 
-		HttpParams params = new  BasicHttpParams();
-		int timeoutConnection = 100000;
-		HttpConnectionParams.setConnectionTimeout(params, timeoutConnection);
+        HttpResponse response = null;
+        try {
+            response = HttpUtil.postReport(this, subject, name, email, latitude, longitude );
 
-		HttpClient httpClient = new DefaultHttpClient(params);
-		try {
-			HttpPost httpPost = new HttpPost(getString(R.string.postURL));
-
-			File f = new File(Environment.getExternalStorageDirectory(),
-			"FMS_photo.jpg");
-			
-			MultipartEntity reqEntity = new MultipartEntity();
-			FileBody fb = new FileBody(f, "image/jpeg");
-			Charset utf8 =  Charset.forName("UTF-8");
-			reqEntity.addPart("photo", fb);
-			reqEntity.addPart("service", new StringBody("FiksGataMi4Android",utf8));
-			reqEntity.addPart("subject", new StringBody(subject,utf8));
-			reqEntity.addPart("name", new StringBody(name,utf8));
-			reqEntity.addPart("email", new StringBody(email,utf8));             
-			reqEntity.addPart("lat", new StringBody(latString,utf8));             
-			reqEntity.addPart("lon", new StringBody(longString,utf8));   
-
-			httpPost.setEntity(reqEntity);
-
-//			Log.i(LOG_TAG,"executing request " + httpPost.getRequestLine());
-			HttpResponse response = httpClient.execute(httpPost);
-
-			HttpEntity resEntity = response.getEntity();
+	        HttpEntity resEntity = response.getEntity();
 			responseString = EntityUtils.toString(resEntity);
-			Log.i(LOG_TAG, "Response was " + responseString);
+			Log.i(LOG_TAG, String.format("Response was %s : %s", response.getStatusLine().getStatusCode(), responseString));
 
 			if (resEntity != null) {
 				Log.i(LOG_TAG, "Response content length: " + resEntity.getContentLength());
 			}
-			//EntityUtils.consume(resEntity);
-		} catch (Exception ex) {
-			Log.v(LOG_TAG, "Exception", ex);
-			exception_string = ex.getMessage();
-			globalStatus = UPLOAD_ERROR;
-			serverResponse = "";
-			return false;
-		} finally {
-			try { httpClient.getConnectionManager().shutdown(); } catch (Exception ignore) {}
-		}
-		// use startswith to workaround bug where CATEGORIES-info
-		// is display on every call to import.cgi
-		if (responseString.startsWith("SUCCESS")) {
-			// launch the Success page
-			globalStatus = SUCCESS;
-			return true;
-		} else {
-			// print the response string?
-			serverResponse = responseString;
-			globalStatus = UPLOAD_ERROR;
-			return false;
-		}
+
+            // use startswith to workaround bug where CATEGORIES-info
+            // is display on every call to import.cgi
+            if (responseString.startsWith("SUCCESS")) {
+                // launch the Success page
+                globalStatus = SUCCESS;
+                return true;
+            } else {
+                // print the response string?
+                serverResponse = responseString;
+                globalStatus = UPLOAD_ERROR;
+                return false;
+            }
+
+        } catch (IOException e) {
+            Log.v(LOG_TAG, "Exception", e);
+            exception_string = e.getMessage();
+            globalStatus = UPLOAD_ERROR;
+            serverResponse = "";
+        }
+        return false;
 
 	}
+
+    private boolean getCategories() {
+        try {
+            HttpResponse response = HttpUtil.getCategories(this, latitude, longitude);
+            String responseString = HttpUtil.isValidResponse(response);
+            if (!CommonUtil.isStringNullOrEmpty(responseString)) {
+                categories = HttpUtil.getCategoriesFromResponse(responseString);
+                return true;
+            }
+        } catch (IOException e) {
+            Log.e(LOG_TAG, e.getMessage(), e.getCause());
+        }
+
+        return false;
+    }
 
 	private boolean checkLoc(Location location) {
 		// get accuracy
@@ -546,6 +535,12 @@ public class Home extends Base {
 				textProgress.setText(R.string.gps_signal_found);
 			}
 			previousGPSFixTime = latestGPSFixTime;
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    getCategories(); // todo fixme implement spinner logic, show that data is loading
+                }
+            });
 			return true;
 		}
 		previousGPSFixTime = latestGPSFixTime;
