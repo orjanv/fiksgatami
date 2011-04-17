@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import android.os.AsyncTask;
+import no.fiksgatami.FiksGataMi;
 import no.fiksgatami.R;
 import no.fiksgatami.utils.CommonUtil;
 import no.fiksgatami.utils.HttpUtil;
@@ -88,16 +90,12 @@ public class Home extends Base {
 	ProgressDialog myProgressDialog = null;
 	private ProgressDialog pd;
 	final Handler mHandler = new Handler();
-	final Runnable mUpdateResults = new Runnable() {
-		public void run() {
-			pd.dismiss();
-			updateResultsInUi();
-		}
-	};
 	private Bundle extras;
 	private TextView textProgress;
 	private String exception_string = "";
     private List<String> categories;
+    private View progressLoading;
+    private ReportUpload taskReportUpload;
 
     // Called when the activity is first created
 	@Override
@@ -114,6 +112,7 @@ public class Home extends Base {
 		btnReport.setVisibility(View.GONE);
 		textProgress = (TextView) findViewById(R.id.progress_text);
 		textProgress.setVisibility(View.GONE);
+        progressLoading = findViewById(R.id.loading);
 
 		if (icicle != null) {
 			havePicture = icicle.getBoolean("photo");
@@ -231,6 +230,7 @@ public class Home extends Base {
 		}
 		if (havePicture && haveDetails) {
 			textProgress.setVisibility(View.VISIBLE);
+            progressLoading.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -255,7 +255,7 @@ public class Home extends Base {
 			public void onClick(View v) {
 				File photo = new File(
 						Environment.getExternalStorageDirectory(),
-				"FMS_photo.jpg");
+                        FiksGataMi.PHOTO_FILENAME);
 				if (photo.exists()) {
 					photo.delete();
 				}
@@ -318,28 +318,14 @@ public class Home extends Base {
 	// Also checks the age and accuracy of the GPS data first
 	// **********************************************************************
 	private void uploadToFMS() {
-		// Log.d(LOG_TAG, "uploadToFMS");
-		pd = ProgressDialog
-		.show(
-				this,
-				getString(R.string.progress_uploading_title),
-				getString(R.string.progress_uploading),
-				true, false);
-		mHandler.post(uploadToFMS);
+	    if (taskReportUpload != null && taskReportUpload.getStatus() == AsyncTask.Status.RUNNING) {
+            taskReportUpload.cancel(true);
+        }
+        taskReportUpload = new ReportUpload();
+        taskReportUpload.execute(null);
 	}
 
-    private Runnable uploadToFMS = new Runnable() {
-        @Override
-        public void run() {
-            doUploadinBackground();
-            mHandler.post(mUpdateResults);
-
-        }
-    };
-
-
-
-	private void updateResultsInUi() {
+ 	private void updateResultsInUi() {
 		if (globalStatus == UPLOAD_ERROR) {
 			showDialog(UPLOAD_ERROR);
 		} else if (globalStatus == UPLOAD_ERROR_SERVER) {
@@ -429,47 +415,6 @@ public class Home extends Base {
 		return null;
 	}
 
-	// **********************************************************************
-	// doUploadinBackground: POST request to FixMyStreet
-	// **********************************************************************
-	private boolean doUploadinBackground() {
-		// Log.d(LOG_TAG, "doUploadinBackground");
-		String responseString = null;
-
-        HttpResponse response = null;
-        try {
-            response = HttpUtil.postReport(this, subject, name, email, latitude, longitude );
-
-	        HttpEntity resEntity = response.getEntity();
-			responseString = EntityUtils.toString(resEntity);
-			Log.i(LOG_TAG, String.format("Response was %s : %s", response.getStatusLine().getStatusCode(), responseString));
-
-			if (resEntity != null) {
-				Log.i(LOG_TAG, "Response content length: " + resEntity.getContentLength());
-			}
-
-            // use startswith to workaround bug where CATEGORIES-info
-            // is display on every call to import.cgi
-            if (responseString.startsWith("SUCCESS")) {
-                // launch the Success page
-                globalStatus = SUCCESS;
-                return true;
-            } else {
-                // print the response string?
-                serverResponse = responseString;
-                globalStatus = UPLOAD_ERROR;
-                return false;
-            }
-
-        } catch (IOException e) {
-            Log.v(LOG_TAG, "Exception", e);
-            exception_string = e.getMessage();
-            globalStatus = UPLOAD_ERROR;
-            serverResponse = "";
-        }
-        return false;
-
-	}
 
     private boolean getCategories() {
         try {
@@ -531,6 +476,7 @@ public class Home extends Base {
 				btnReport.setVisibility(View.VISIBLE);
 				btnReport.setText(R.string.gps_signal_found_please_report_now);
 				textProgress.setVisibility(View.GONE);
+                progressLoading.setVisibility(View.GONE);
 			} else {
 				textProgress.setText(R.string.gps_signal_found);
 			}
@@ -718,4 +664,61 @@ public class Home extends Base {
 		is.close();
 		return bytes;
 	}
+
+    private class ReportUpload extends AsyncTask<Void, Void, Boolean> {
+
+        @Override
+        protected void onPreExecute() {
+            pd = ProgressDialog
+            .show(Home.this,
+                    getString(R.string.progress_uploading_title),
+                    getString(R.string.progress_uploading),
+                    true, false);
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            String responseString = null;
+
+            HttpResponse response = null;
+            try {
+                response = HttpUtil.postReport(Home.this, subject, name, email, latitude, longitude );
+
+                HttpEntity resEntity = response.getEntity();
+                responseString = EntityUtils.toString(resEntity);
+                Log.i(LOG_TAG, String.format("Response was %s : %s", response.getStatusLine().getStatusCode(), responseString));
+
+                if (resEntity != null) {
+                    Log.i(LOG_TAG, "Response content length: " + resEntity.getContentLength());
+                }
+
+                // use startswith to workaround bug where CATEGORIES-info
+                // is display on every call to import.cgi
+                if (responseString.startsWith("SUCCESS")) {
+                    // launch the Success page
+                    globalStatus = SUCCESS;
+                    return true;
+                } else {
+                    // print the response string?
+                    serverResponse = responseString;
+                    globalStatus = UPLOAD_ERROR;
+                    return false;
+                }
+
+            } catch (IOException e) {
+                Log.v(LOG_TAG, "Exception", e);
+                exception_string = e.getMessage();
+                globalStatus = UPLOAD_ERROR;
+                serverResponse = "";
+            }
+            return false;
+
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            pd.dismiss();
+			updateResultsInUi();
+        }
+    }
 }

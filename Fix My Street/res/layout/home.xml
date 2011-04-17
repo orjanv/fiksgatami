@@ -25,6 +25,16 @@
 			android:id="@+id/progress_text" android:layout_height="wrap_content"
 			android:text="Venter på GPS... Pass på at du kan se himmelen." />
 
+        <ProgressBar android:id="@+id/loading"
+                     android:indeterminate="true"
+                     android:visibility="gone"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_horizontal"
+                     android:layout_marginTop="4dip"
+                     style="@android:style/Widget.ProgressBar.Inverse"
+                     />
+
 		<Button android:id="@+id/report_button" android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:text="Rapporter til FiksGataMi"
 			android:paddingRight="10dip" android:paddingLeft="10dip" />

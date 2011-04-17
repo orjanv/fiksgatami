@@ -3,6 +3,7 @@ package no.fiksgatami.utils;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
+import no.fiksgatami.FiksGataMi;
 import no.fiksgatami.R;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -41,7 +42,6 @@ public class HttpUtil {
     private static final String FORM_LONGITUDE = "lon";
     private static final String FORM_CATEGORIES = "categories";
 
-    private static final String PHOTO_FILENAME = "FMS_photo.jpg";
     private static final int TIMEOUT_CONNECTION = 100000;
 
 
@@ -55,7 +55,7 @@ public class HttpUtil {
         httpPost.addHeader("User-Agent", USER_AGENT);
 
         File f = new File(Environment.getExternalStorageDirectory(),
-                PHOTO_FILENAME);
+                FiksGataMi.PHOTO_FILENAME);
 
         MultipartEntity reqEntity = new MultipartEntity();
         FileBody fb = new FileBody(f, "image/jpeg");
