@@ -349,68 +349,68 @@ public class Home extends Base {
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
-        case COUNTRY_ERROR:
-            return new AlertDialog.Builder(Home.this)
-            .setTitle(R.string.dialog_country_error_title)
-            .setPositiveButton(R.string.common_ok,
-                    new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,
-                        int whichButton) {
-                }
-            })
-            .setMessage(R.string.dialog_country_error)
-            .create();
-        case UPLOAD_ERROR:
-            return new AlertDialog.Builder(Home.this)
-            .setTitle(R.string.dialog_upload_error_title)
-            .setPositiveButton(R.string.common_ok,
-                    new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,
-                        int whichButton) {
-                }
-            })
-            .setMessage(String.format(getString(R.string.dialog_upload_error), exception_string, serverResponse)).create();
-        case UPLOAD_ERROR_SERVER:
-            return new AlertDialog.Builder(Home.this)
-            .setTitle(R.string.dialog_upload_server_error_title)
-            .setPositiveButton(R.string.common_ok,
-                    new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,
-                        int whichButton) {
-                }
-            })
-            .setMessage(String.format(getString(R.string.dialog_upload_server_error, serverResponse))).create();
+            case COUNTRY_ERROR:
+                return new AlertDialog.Builder(Home.this)
+                .setTitle(R.string.dialog_country_error_title)
+                .setPositiveButton(R.string.common_ok,
+                        new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                            int whichButton) {
+                    }
+                })
+                .setMessage(R.string.dialog_country_error)
+                .create();
+            case UPLOAD_ERROR:
+                return new AlertDialog.Builder(Home.this)
+                .setTitle(R.string.dialog_upload_error_title)
+                .setPositiveButton(R.string.common_ok,
+                        new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                            int whichButton) {
+                    }
+                })
+                .setMessage(String.format(getString(R.string.dialog_upload_error), exception_string, serverResponse)).create();
+            case UPLOAD_ERROR_SERVER:
+                return new AlertDialog.Builder(Home.this)
+                .setTitle(R.string.dialog_upload_server_error_title)
+                .setPositiveButton(R.string.common_ok,
+                        new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                            int whichButton) {
+                    }
+                })
+                .setMessage(String.format(getString(R.string.dialog_upload_server_error, serverResponse))).create();
 
-        case LOCATION_NOT_FOUND:
-            return new AlertDialog.Builder(Home.this)
-            .setTitle(R.string.dialog_gps_no_location_title)
-            .setPositiveButton(R.string.common_ok,
-                    new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,
-                        int whichButton) {
+            case LOCATION_NOT_FOUND:
+                return new AlertDialog.Builder(Home.this)
+                .setTitle(R.string.dialog_gps_no_location_title)
+                .setPositiveButton(R.string.common_ok,
+                        new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                            int whichButton) {
+                    }
+                })
+                .setMessage(R.string.dialog_gps_no_location)
+                .create();
+            case PHOTO_NOT_FOUND:
+                return new AlertDialog.Builder(Home.this).setTitle(R.string.dialog_picture_not_found_title)
+                .setPositiveButton(R.string.common_ok,
+                        new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                            int whichButton) {
+                    }
+                }).setMessage(R.string.dialog_picture_not_found).create();
+            case UPON_UPDATE:
+                if (versionName == null) {
+                    versionName = "";
                 }
-            })
-            .setMessage(R.string.dialog_gps_no_location)
-            .create();
-        case PHOTO_NOT_FOUND:
-            return new AlertDialog.Builder(Home.this).setTitle(R.string.dialog_picture_not_found_title)
-            .setPositiveButton(R.string.common_ok,
-                    new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,
-                        int whichButton) {
-                }
-            }).setMessage(R.string.dialog_picture_not_found).create();
-        case UPON_UPDATE:
-            if (versionName == null) {
-                versionName = "";
-            }
-            return new AlertDialog.Builder(Home.this).setTitle(R.string.app_update__whats_new_title)
-            .setPositiveButton(R.string.common_ok,
-                    new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,
-                        int whichButton) {
-                }
-            }).setMessage(String.format(getString(R.string.app_update__whats_new_details, versionName))).create();
+                return new AlertDialog.Builder(Home.this).setTitle(R.string.app_update__whats_new_title)
+                .setPositiveButton(R.string.common_ok,
+                        new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                            int whichButton) {
+                    }
+                }).setMessage(String.format(getString(R.string.app_update__whats_new_details, versionName))).create();
         }
         return null;
     }
@@ -610,20 +610,20 @@ public class Home extends Base {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case MENU_HELP:
-            Intent i = new Intent(Home.this, Help.class);
-            if (extras != null) {
-                i.putExtras(extras);
-            }
-            startActivity(i);
-            return true;
-        case MENU_ABOUT:
-            Intent j = new Intent(Home.this, About.class);
-            if (extras != null) {
-                j.putExtras(extras);
-            }
-            startActivity(j);
-            return true;
+            case MENU_HELP:
+                Intent i = new Intent(Home.this, Help.class);
+                if (extras != null) {
+                    i.putExtras(extras);
+                }
+                startActivity(i);
+                return true;
+            case MENU_ABOUT:
+                Intent j = new Intent(Home.this, About.class);
+                if (extras != null) {
+                    j.putExtras(extras);
+                }
+                startActivity(j);
+                return true;
         }
         return false;
     }
