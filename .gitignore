@@ -3,3 +3,10 @@ Fix My Street/.classpath
 Fix My Street/httpmime-4.1.1.jar
 Fix My Street/bin/
 Fix My Street/gen/
+#!Fix\ My\ Street/.settings/org.eclipse.jdt.core.prefs
+#Fix My Street/.settings/
+
+Fix My Street/.settings/org.eclipse.core.resources.prefs
+Fix My Street/.settings/org.eclipse.core.runtime.prefs
+Fix My Street/.settings/org.eclipse.jdt.ui.prefs
+Fix My Street/.settings/org.eclipse.ltk.core.refactoring.prefs
