@@ -4,3 +4,4 @@
 * Allow user to input details before sending
 * Allow user to select category before sending.
 * Allow user to turn on GPS while it waits for GPS signal
+* Offline-modus (save a package for later sending to FMS, should it be editable?)
