@@ -1,6 +1,9 @@
 package no.fiksgatami.utils;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 import android.util.Log;
 import no.fiksgatami.FiksGataMi;
@@ -31,7 +34,6 @@ import java.util.List;
  */
 public class HttpUtil {
     private static final String LOG_TAG = "HttpUtil";
-    private static final String USER_AGENT = "FiksGataMi4Android/1.0";
 
     private static final String FORM_PHOTO = "photo";
     private static final String FORM_SERVICE = "service";
@@ -50,9 +52,8 @@ public class HttpUtil {
         HttpConnectionParams.setConnectionTimeout(params, TIMEOUT_CONNECTION);
 
         HttpClient httpClient = new DefaultHttpClient(params);
-
         HttpPost httpPost = new HttpPost(context.getString(R.string.postURL));
-        httpPost.addHeader("User-Agent", USER_AGENT);
+        httpPost.addHeader("User-Agent", getUserAgent(context));
 
         File f = new File(Environment.getExternalStorageDirectory(),
                 FiksGataMi.PHOTO_FILENAME);
@@ -94,7 +95,7 @@ public class HttpUtil {
         HttpClient httpClient = new DefaultHttpClient(params);
 
         HttpPost httpPost = new HttpPost(context.getString(R.string.postURL));
-        httpPost.addHeader("User-Agent", USER_AGENT);
+        httpPost.addHeader("User-Agent", getUserAgent(context));
 
         final String hack = "hackForFetchingCategories";
         MultipartEntity reqEntity = new MultipartEntity();
@@ -155,4 +156,15 @@ public class HttpUtil {
         }
         return null;
     }
+    public static String getUserAgent(Context context) {
+        String USER_AGENT = "FiksGataMi4Android/";
+        PackageManager pm = context.getPackageManager();
+        try {
+           PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
+           USER_AGENT += pi.versionName + pi.versionCode;
+        } catch (NameNotFoundException ex) {
+            USER_AGENT += "unknown/-1";
+        }
+        return USER_AGENT;
+     }
 }
