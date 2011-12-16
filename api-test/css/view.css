@@ -10,7 +10,7 @@ body
 #form_container
 {
 	background:#fff;
-	
+
 	margin:0 auto;
 	text-align:left;
 	width:640px;
@@ -64,12 +64,12 @@ h1
 	padding:0;
 	text-decoration:none;
 	text-indent:-8000px;
-	
+
 }
 
 h1 a
 {
-	
+
 	display:block;
 	height:100%;
 	min-height:40px;
@@ -589,7 +589,7 @@ form li:hover .guidelines
 }
 
 /*** Success Message ****/
-.form_success 
+.form_success
 {
 	clear: both;
 	margin: 0;
@@ -664,7 +664,7 @@ ul.password{
 .embed form.appnitro
 {
 	margin:0px 0px 0;
-	
+
 }
 
 
@@ -681,60 +681,60 @@ background: #fff;
 font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
 }
 
-.calendar .button { 
-text-align: center;    
-padding: 2px;          
+.calendar .button {
+text-align: center;
+padding: 2px;
 }
 
 .calendar .nav {
 background:#f5f5f5;
 }
 
-.calendar thead .title { 
-font-weight: bold;      
+.calendar thead .title {
+font-weight: bold;
 text-align: center;
 background: #dedede;
 color: #000;
 padding: 2px 0 3px 0;
 }
 
-.calendar thead .headrow { 
+.calendar thead .headrow {
 background: #f5f5f5;
 color: #444;
 font-weight:bold;
 }
 
-.calendar thead .daynames { 
+.calendar thead .daynames {
 background: #fff;
 color:#333;
 font-weight:bold;
 }
 
-.calendar thead .name { 
+.calendar thead .name {
 border-bottom: 1px dotted #ccc;
 padding: 2px;
 text-align: center;
 color: #000;
 }
 
-.calendar thead .weekend { 
+.calendar thead .weekend {
 color: #666;
 }
 
-.calendar thead .hilite { 
+.calendar thead .hilite {
 background-color: #444;
 color: #fff;
 padding: 1px;
 }
 
-.calendar thead .active { 
+.calendar thead .active {
 background-color: #d12f19;
 color:#fff;
 padding: 2px 0px 0px 2px;
 }
 
 
-.calendar tbody .day { 
+.calendar tbody .day {
 width:1.8em;
 color: #222;
 text-align: right;
@@ -762,19 +762,19 @@ background: #FFF1AF;
 background: #FFF1AF;
 }
 
-.calendar tbody td.hilite { 
+.calendar tbody td.hilite {
 padding: 1px 1px 1px 1px;
 background:#444 !important;
 color:#fff !important;
 }
 
-.calendar tbody td.active { 
+.calendar tbody td.active {
 color:#fff;
 background: #529214 !important;
 padding: 2px 2px 0px 2px;
 }
 
-.calendar tbody td.selected { 
+.calendar tbody td.selected {
 font-weight: bold;
 border: 1px solid #888;
 padding: 1px 1px 1px 1px;
@@ -782,11 +782,11 @@ background: #f5f5f5 !important;
 color: #222 !important;
 }
 
-.calendar tbody td.weekend { 
+.calendar tbody td.weekend {
 color: #666;
 }
 
-.calendar tbody td.today { 
+.calendar tbody td.today {
 font-weight: bold;
 color: #529214;
 background:#D9EFC2;
@@ -794,21 +794,21 @@ background:#D9EFC2;
 
 .calendar tbody .disabled { color: #999; }
 
-.calendar tbody .emptycell { 
+.calendar tbody .emptycell {
 visibility: hidden;
 }
 
-.calendar tbody .emptyrow { 
+.calendar tbody .emptyrow {
 display: none;
 }
 
-.calendar tfoot .footrow { 
+.calendar tfoot .footrow {
 text-align: center;
 background: #556;
 color: #fff;
 }
 
-.calendar tfoot .ttip { 
+.calendar tfoot .ttip {
 background: #222;
 color: #fff;
 font-size:10px;
@@ -816,14 +816,14 @@ border-top: 1px solid #dedede;
 padding: 3px;
 }
 
-.calendar tfoot .hilite { 
+.calendar tfoot .hilite {
 background: #aaf;
 border: 1px solid #04f;
 color: #000;
 padding: 1px;
 }
 
-.calendar tfoot .active { 
+.calendar tfoot .active {
 background: #77c;
 padding: 2px 0px 0px 2px;
 }

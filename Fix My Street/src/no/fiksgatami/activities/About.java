@@ -41,10 +41,10 @@ public class About extends Base {
 		TextView noteView = (TextView) findViewById(R.id.faq);
 		TextView noteView2 = (TextView) findViewById(R.id.faq2);
 		final TextView licAppView = (TextView) findViewById(R.id.licApp);
-		
+
 		final TextView licLibView = (TextView) findViewById(R.id.licLib);
 
-		
+
 		((ToggleButton) findViewById(R.id.btnViewLicApp)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
@@ -80,7 +80,7 @@ public class About extends Base {
 		noteView2.setText(String.format(getString(R.string.copyright), versionName));
 		Linkify.addLinks(noteView, Linkify.ALL);
 		Linkify.addLinks(noteView2, Linkify.ALL);
-		
+
 	}
 
 	// ****************************************************

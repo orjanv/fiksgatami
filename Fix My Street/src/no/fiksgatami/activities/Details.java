@@ -1,6 +1,6 @@
 // ********************************************************************************
 //details.java
-//This file is where most of the work of the application happens. It collects the 
+//This file is where most of the work of the application happens. It collects the
 //subject of the problem, plus the user's name and email, from the Android form.
 //It uploads them to FixMyStreet, and shows a success or failure message.
 //
